@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WeatherFinder.Application.Commands.UserCommand;
 using WeatherFinder.Application.Queries.UserQuery;
+using WeatherFinder.Shared.DTOs.Request;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,17 +32,23 @@ namespace WeatherFinder.WebAPI.Controllers
             var result = await _sender.Send(new GetUserByIdQuery(id, false));
             return Ok(result);
         }
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("create")]
+        public async Task<IActionResult> Post([FromBody] UserRequest userRequest)
         {
+            var result = await _sender.Send(new CreateUserCommand(userRequest));
+            return Ok(result);
         }
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> Put(string id, [FromBody] UserRequest userRequest)
         {
+            await _sender.Send(new UpdateUserCommand(id, userRequest));
+            return NoContent();
         }
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> Delete(string id)
         {
+            await _sender.Send(new DeleteUserCommand(id));
+            return NoContent();
         }
     }
 }

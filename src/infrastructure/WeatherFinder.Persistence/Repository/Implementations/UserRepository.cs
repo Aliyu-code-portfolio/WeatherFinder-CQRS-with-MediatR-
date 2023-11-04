@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WeatherFinder.Domain.Models;
 using WeatherFinder.Persistence.Data;
 using WeatherFinder.Persistence.Repository.Abstractions;
@@ -12,9 +7,10 @@ namespace WeatherFinder.Persistence.Repository.Implementations
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
+        RepositoryContext repositoryContext;
         public UserRepository(RepositoryContext repositoryContext):base(repositoryContext)
         {
-            
+            this.repositoryContext = repositoryContext;
         }
         public void CreateUser(User user)
         {
@@ -36,9 +32,14 @@ namespace WeatherFinder.Persistence.Repository.Implementations
             return await FindByCondition(u => u.Id.Equals(id), trackChanges).FirstOrDefaultAsync();
         }
 
+
         public void UpdateUser(User user)
         {
             Update(user);
+        }
+        public async Task SaveChangeAsync()
+        {
+            await repositoryContext.SaveChangesAsync();
         }
     }
 }

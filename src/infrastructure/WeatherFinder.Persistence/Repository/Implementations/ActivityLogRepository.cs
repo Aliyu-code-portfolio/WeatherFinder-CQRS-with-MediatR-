@@ -12,9 +12,10 @@ namespace WeatherFinder.Persistence.Repository.Implementations
 {
     public class ActivityLogRepository : RepositoryBase<ActivityLog>, IActivityLogRepository
     {
+        private readonly RepositoryContext repositoryContext;
         public ActivityLogRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-
+            this.repositoryContext = repositoryContext;
         }
         public void CreateActivityLog(ActivityLog activityLog)
         {
@@ -44,6 +45,10 @@ namespace WeatherFinder.Persistence.Repository.Implementations
         public void UpdateActivityLog(ActivityLog activityLog)
         {
             Update(activityLog);
+        }
+        public async Task SaveChangesAsync()
+        {
+            await repositoryContext.SaveChangesAsync();
         }
     }
 }

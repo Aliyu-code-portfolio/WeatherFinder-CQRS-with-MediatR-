@@ -14,5 +14,6 @@ namespace WeatherFinder.Persistence.Repository.Abstractions
         void UpdateUser(User user);
         void DeleteUser(User user);
         void CreateUser(User user);
+        Task SaveChangeAsync();
     }
 }

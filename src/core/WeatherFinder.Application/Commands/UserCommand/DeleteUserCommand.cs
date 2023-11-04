@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WeatherFinder.Shared.DTOs.Request;
 
 namespace WeatherFinder.Application.Commands.UserCommand
 {
-    public sealed record UpdateUserCommand(string userId, UserRequest userRequest):IRequest<Unit>;
+    public sealed record DeleteUserCommand(string id):IRequest<Unit>;
 }

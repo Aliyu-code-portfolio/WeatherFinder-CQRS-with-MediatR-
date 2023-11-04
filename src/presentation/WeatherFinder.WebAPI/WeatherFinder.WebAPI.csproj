@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\core\WeatherFinder.Application\WeatherFinder.Application.csproj" />
+    <ProjectReference Include="..\..\core\WeatherFinder.Shared\WeatherFinder.Shared.csproj" />
     <ProjectReference Include="..\..\infrastructure\WeatherFinder.Persistence\WeatherFinder.Persistence.csproj" />
   </ItemGroup>
 

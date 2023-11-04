@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WeatherFinder.Application.Commands.ActivityLogCommand;
 using WeatherFinder.Application.Queries.ActivityLogQuery;
+using WeatherFinder.Shared.DTOs.Request;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,33 +25,26 @@ namespace WeatherFinder.WebAPI.Controllers
             return Ok(result);
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("user/{id}")]
         public async Task<IActionResult> GetByUserId(string id)
         {
             var result = await _sender.Send(new GetAllUserActivityQuery(id, false));
             return Ok(result);
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _sender.Send(new GetActivityByIdQuery(id, false));
             return Ok(result);
         }
 
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("create")]
+        public async Task<IActionResult> Post([FromBody] ActivityRequest activityRequest)
         {
+            var result = await _sender.Send(new CreateActivityCommand(activityRequest));
+            return Ok(result);  
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -15,5 +15,6 @@ namespace WeatherFinder.Persistence.Repository.Abstractions
         void UpdateActivityLog(ActivityLog activityLog);
         void DeleteActivityLog(ActivityLog activityLog);
         void CreateActivityLog(ActivityLog activityLog);
+        Task SaveChangesAsync();
     }
 }
