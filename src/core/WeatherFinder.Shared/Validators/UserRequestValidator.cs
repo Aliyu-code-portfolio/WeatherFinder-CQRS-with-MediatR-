@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
-using FluentValidation.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WeatherFinder.Shared.DTOs.Request;
+using WeatherFinder.Shared.Extensions;
 
 namespace WeatherFinder.Shared.Validators
 {
@@ -13,8 +8,8 @@ namespace WeatherFinder.Shared.Validators
     {
         public UserRequestValidator()
         {
-            RuleFor(model => model.FullName).MaximumLength(50).WithMessage("Full name must be max 50 characters").Matches("/^[A-Za-z]+$/").WithMessage("Name must only contains alphabets");
-            RuleFor(model => model.Email).EmailAddress().WithMessage("Invalid email address").MaximumLength(100).WithMessage("Email must be max 100 characters");
+            RuleFor(model => model.FullName).FullName();
+            RuleFor(model => model.Email).EmailAddress().MaximumLength(100).WithMessage("Email must be max 100 characters");
         }
     }
 }

@@ -13,6 +13,7 @@ namespace WeatherFinder.Shared.Validators
         public ActivityRequestValidator()
         {
             RuleFor(model => model.Description).MaximumLength(int.MaxValue);
+            RuleFor(model => model.Activity).IsInEnum();
         }
     }
 }
