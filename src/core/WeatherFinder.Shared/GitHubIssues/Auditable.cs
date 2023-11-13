@@ -8,6 +8,10 @@ namespace WeatherFinder.Shared.GitHubIssues
 {
     public class Auditable
     {
-
+        public int Id { get; set; }
+        public string Joshua { get; set; }
+        public string Bolu { get; set; }
+        public string Victor { get; set; }
+        public string Seyi { get; set; }
     }
 }
